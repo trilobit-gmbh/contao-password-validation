@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        autoconfigure: true
+
     Terminal42\PasswordValidationBundle\EventListener\PasswordRegexpListener:
         arguments:
             - '@terminal42_password_validation.validator_manager'
