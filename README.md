@@ -58,7 +58,7 @@ terminal42_password_validation:
   Contao\BackendUser:
     min_length: 10
     haveibeenpwned: 1
-  Guest:
+  Contao\Form:
     min_length: 10
     max_length: 20
     require:
