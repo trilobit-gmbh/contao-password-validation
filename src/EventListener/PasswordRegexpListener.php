@@ -43,7 +43,6 @@ final readonly class PasswordRegexpListener
 
         $dc = $widget->dataContainer;
         $request = $this->requestStack->getCurrentRequest();
-        $formGeneratorField = false;
 
         if ($dc instanceof ModulePersonalData) {
             $userId = (int) FrontendUser::getInstance()->id;
@@ -73,15 +72,14 @@ final readonly class PasswordRegexpListener
             } else {
                 return true;
             }
-        } elseif ('password' === $widget->type) {
-            $userId = 0;
-            $userEntity = 'Guest';
-            $formGeneratorField = true;
+        } elseif ('password' === $widget->type && $request && $this->scopeMatcher->isFrontendRequest($request)) {
+            $userId = null;
+            $userEntity = 'Contao\Form';
         } else {
             return true;
         }
 
-        if (false === $formGeneratorField && false === $this->configuration->hasConfiguration($userEntity)) {
+        if (false === $this->configuration->hasConfiguration($userEntity)) {
             return true;
         }
 
